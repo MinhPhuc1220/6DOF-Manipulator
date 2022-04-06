@@ -74,4 +74,17 @@ class UIFunctions(MainWindow):
                 self.cb_baudrates.setCurrentIndex(0)
 
     def uiDefinitions(self):
+        self.t = 0
+        self.the1 = list()
+        self.the2 = list()
+        self.the3 = list()
+        self.the4 = list()
+        self.the5 = list()
+        self.the6 = list()
+        self.x1 = list()
+        # khởi tạo phân luồng 
+        self.threadpool = QtCore.QThreadPool()
+        self.threadpool_1 = QtCore.QThreadPool()
+        # khởi tạo báo serial
+        self.ser =  serial.Serial()
         UIFunctions.list_port(self)
