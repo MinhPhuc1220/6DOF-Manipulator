@@ -300,6 +300,44 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>PARAMETERS</string>
     </property>
+    <widget class="QPushButton" name="btn_send">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>20</y>
+       <width>101</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Send</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_disconnect_2">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>20</y>
+       <width>111</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Receive</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="gb_response">
     <property name="geometry">
@@ -345,7 +383,7 @@ color: rgb(255, 255, 255);</string>
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -363,6 +401,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_the1">
      <property name="geometry">
@@ -376,7 +417,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -395,7 +436,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -414,7 +455,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -432,6 +473,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_the3">
      <property name="geometry">
@@ -445,7 +489,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -464,7 +508,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -482,6 +526,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_the4">
      <property name="geometry">
@@ -495,7 +542,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -514,7 +561,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -532,6 +579,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_the5">
      <property name="geometry">
@@ -545,7 +595,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -564,7 +614,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -582,6 +632,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_the6">
      <property name="geometry">
@@ -595,7 +648,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -614,7 +667,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -632,6 +685,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_x">
      <property name="geometry">
@@ -645,7 +701,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -664,7 +720,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -682,6 +738,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_z">
      <property name="geometry">
@@ -695,7 +754,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -705,7 +764,7 @@ QLineEdit:focus {
     <widget class="QLabel" name="lbl_roll">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>240</x>
        <y>150</y>
        <width>47</width>
        <height>31</height>
@@ -714,7 +773,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -724,7 +783,7 @@ QLineEdit:focus {
     <widget class="QLabel" name="lbl_pitch">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>240</x>
        <y>190</y>
        <width>47</width>
        <height>31</height>
@@ -733,7 +792,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -743,7 +802,7 @@ QLineEdit:focus {
     <widget class="QLabel" name="lbl_yaw">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>240</x>
        <y>230</y>
        <width>47</width>
        <height>31</height>
@@ -752,7 +811,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -771,7 +830,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -789,6 +848,9 @@ QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="lbl_y">
      <property name="geometry">
@@ -802,7 +864,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
@@ -821,7 +883,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -838,6 +900,9 @@ QLineEdit:hover {
 QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLineEdit" name="le_yaw">
@@ -852,7 +917,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -869,6 +934,9 @@ QLineEdit:hover {
 QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLineEdit" name="le_y">
@@ -883,7 +951,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -900,6 +968,9 @@ QLineEdit:hover {
 QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLineEdit" name="le_z">
@@ -914,7 +985,7 @@ QLineEdit:focus {
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>12</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -931,6 +1002,9 @@ QLineEdit:hover {
 QLineEdit:focus {
 	border: 2px solid rgb(91, 101, 124);
 }</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>

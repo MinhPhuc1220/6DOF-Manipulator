@@ -74,6 +74,7 @@ class UIFunctions(MainWindow):
                 self.cb_baudrates.setCurrentIndex(0)
 
     def uiDefinitions(self):
+        self.line_data = 1
         self.t = 0
         self.the1 = list()
         self.the2 = list()
@@ -88,3 +89,10 @@ class UIFunctions(MainWindow):
         # khởi tạo báo serial
         self.ser =  serial.Serial()
         UIFunctions.list_port(self)
+        
+        # xoá bảng excel
+        wb=openpyxl.load_workbook('Data.xlsx')
+        sheet1= wb['Sheet1']
+        sheet1.delete_cols(1,7) # xoá từ cột A:G
+        wb.close
+        wb.save('Data.xlsx')

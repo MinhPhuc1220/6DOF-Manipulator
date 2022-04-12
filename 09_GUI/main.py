@@ -23,6 +23,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import pyqtSlot
 # import thư viện GUI_Functions
 from GUI_Functions import *
+import openpyxl
 
 # class cấu hình nhúng matplotlib
 class MplCanvas(FigureCanvas):
@@ -36,6 +37,7 @@ class MplCanvas(FigureCanvas):
         self.ax1.set_ylim(-10, 10)
         self.ax1.set_xlabel('Time',fontsize=12)
         self.ax1.set_ylabel('Theta 1',fontsize=12)
+        # self.ax1.grid(True)
 
         self.ax2 = fig.add_subplot(322)
         self.ax2.set_xlim(-10,10)
@@ -122,31 +124,37 @@ class MainWindow(QMainWindow):
         self.sc.ax1.set_xlabel('Time',fontsize=12)
         self.sc.ax1.set_ylabel('Theta 1',fontsize=12)
         self.sc.ax1.plot(self.x1, self.the1, 'r')
+        self.sc.ax1.grid()
 
         self.sc.ax2.cla()       
         self.sc.ax2.set_xlabel('Time',fontsize=12)
         self.sc.ax2.set_ylabel('Theta 2',fontsize=12)
         self.sc.ax2.plot(self.x1, self.the2, 'r')
+        self.sc.ax2.grid()
 
         self.sc.ax3.cla()
         self.sc.ax3.set_xlabel('Time',fontsize=12)
         self.sc.ax3.set_ylabel('Theta 3',fontsize=12)
         self.sc.ax3.plot(self.x1, self.the3, 'r')
+        self.sc.ax3.grid()
 
         self.sc.ax4.cla()
         self.sc.ax4.set_xlabel('Time',fontsize=12)
         self.sc.ax4.set_ylabel('Theta 4',fontsize=12)
         self.sc.ax4.plot(self.x1, self.the4, 'r')
+        self.sc.ax4.grid()
 
         self.sc.ax5.cla()
         self.sc.ax5.set_xlabel('Time',fontsize=12)
         self.sc.ax5.set_ylabel('Theta 5',fontsize=12)
         self.sc.ax5.plot(self.x1, self.the5, 'r')
+        self.sc.ax5.grid()
 
         self.sc.ax6.cla()
         self.sc.ax6.set_xlabel('Time',fontsize=12)
         self.sc.ax6.set_ylabel('Theta 6',fontsize=12)
         self.sc.ax6.plot(self.x1, self.the6, 'r')
+        self.sc.ax6.grid()
         # cập nhập, plot lại đáp ứng
         self.sc.draw()
 
@@ -198,6 +206,40 @@ class MainWindow(QMainWindow):
                         self.the6.append(float(self.data[5]))
                         # cập nhập thời gian
                         self.t += 0.01
+
+                        # hiển thị theta liên tục theo tg thực 
+                        self.le_the1.setText(str(self.data[0]))
+                        self.le_the2.setText(str(self.data[1]))
+                        self.le_the3.setText(str(self.data[2]))
+                        self.le_the4.setText(str(self.data[3]))
+                        self.le_the5.setText(str(self.data[4]))
+                        self.le_the6.setText(str(self.data[5]))
+
+                        # tăng số thứ tự hàng theo từng chu kì lấy mẫu
+                        self.line_data = self.line_data + 1  
+                        # ghi dữ liệu vào file excel
+                        cell_t    = ("A"+str(self.line_data))
+                        cell_the1 = ("B"+str(self.line_data))
+                        cell_the2 = ("C"+str(self.line_data))
+                        cell_the3 = ("D"+str(self.line_data))
+                        cell_the4 = ("E"+str(self.line_data))
+                        cell_the5 = ("F"+str(self.line_data))
+                        cell_the6 = ("G"+str(self.line_data))
+                        # load file excel
+                        wb = openpyxl.load_workbook('Data.xlsx')
+                        # xử lý data trên sheet1
+                        sheet1 = wb['Sheet1']
+                        # thay đổi giá trị từng cell trong sheet1
+                        sheet1[cell_t].value = self.t 
+                        sheet1[cell_the1].value = float(self.data[0])
+                        sheet1[cell_the2].value = float(self.data[1])
+                        sheet1[cell_the3].value = float(self.data[2])
+                        sheet1[cell_the4].value = float(self.data[3])
+                        sheet1[cell_the5].value = float(self.data[4])
+                        sheet1[cell_the6].value = float(self.data[5])
+                        # lưu lại dữ liệu vừa thêm
+                        wb.close
+                        wb.save('Data.xlsx')
                     # # giới hạn số phần tử để hiển thị trên hình plot (không cần thiết)    
                     # if len(self.the1) > 500:
                     #     self.the1.pop(0)
