@@ -6,9 +6,9 @@
 clc;
 clear all;
 close all;
-syms e1 e2 e3 e4 e5 e6 
-syms de1 de2 de3 de4 de5 de6 
-syms dde1 dde2 dde3 dde4 dde5 dde6 
+syms e1 e2 e3 e4 e5 e6
+syms de1 de2 de3 de4 de5 de6
+syms dde1 dde2 dde3 dde4 dde5 dde6
 syms a1 a2 a3 d1 d4 d7 
 syms m1 m2 m3 m4 m5 m6 
 syms I1 I2 I3 I4 I5 I6 
@@ -96,7 +96,7 @@ err1 = simplify(expand(v01c - v01c_))
 TP02c = (T01*T12*[P2c; 1]);
 P02c = TP02c(1:3);
 % Angular velocity in frame 1:
-w2 = simplify(R21*w1 + de2*[0;0;1])
+w2 = simplify(R21*w1 + de2*[0;0 1]))
 % Linear velocity of the origin in frame 1:
 v2 = simplify(R21*(v1 + cross(w1,P12)))
 % Linear velocity in frame 0:
@@ -110,7 +110,7 @@ err2 = simplify(expand(v02c - v02c_))
 TP03c = (T01*T12*T23*[P3c; 1]);
 P03c = TP03c(1:3);
 % Angular velocity in frame 1:
-w3 = simplify(R32*w2 + de3*[0;0;1])
+w3 = simplify(R32*w2 + de3*[0 0 1].')
 % Linear velocity of the origin in frame 1:
 v3 = simplify(R32*(v2 + cross(w2,P23)))
 % Linear velocity in frame 0:
@@ -124,7 +124,7 @@ err3 = simplify(expand(v03c - v03c_))
 TP04c = (T01*T12*T23*T34*[P4c; 1]);
 P04c = TP04c(1:3);
 % Angular velocity in frame 1:
-w4 = simplify(R43*w3 + de4*[0;0;1])
+w4 = simplify(R43*w3 + de4*[0 0 1].')
 % Linear velocity of the origin in frame 1:
 v4 = simplify(R43*(v3 + cross(w3,P34)))
 % Linear velocity in frame 0:
@@ -138,7 +138,7 @@ err4 = simplify(expand(v04c - v04c_))
 TP05c = (T01*T12*T23*T34*T45*[P5c; 1]);
 P05c = TP05c(1:3);
 % Angular velocity in frame 1:
-w5 = simplify(R54*w4 + de5*[0;0;1])
+w5 = simplify(R54*w4 + de5*[0 0 1].')
 % Linear velocity of the origin in frame 1:
 v5 = simplify(R54*(v4 + cross(w4,P45)))
 % Linear velocity in frame 0:
@@ -152,7 +152,7 @@ err5 = simplify(expand(v05c - v05c_))
 TP06c = (T01*T12*T23*T34*T45*T56*[P6c; 1]);
 P06c = TP06c(1:3);
 % Angular velocity in frame 1:
-w6 = simplify(R65*w5 + de6*[0;0;1])
+w6 = simplify(R65*w5 + de6*[0 0 1].')
 % Linear velocity of the origin in frame 1:
 v6 = simplify(R65*(v5 + cross(w5,P56)))
 % Linear velocity in frame 0:

@@ -27,47 +27,46 @@ import openpyxl
 
 # class cấu hình nhúng matplotlib
 class MplCanvas(FigureCanvas):
-    def __init__(self, parent=None, width=5, height=4, dpi=100):
+    def __init__(self, parent=None, width=5, height=4, dpi=100, name=''):
         fig = Figure(figsize=(width, height), dpi=dpi)
-        fig.suptitle('Theta',fontsize=15)
+        fig.suptitle(name,fontsize=15)
         fig.patch.set_facecolor('#f1f1f1')
         
         self.ax1 = fig.add_subplot(321)
         self.ax1.set_xlim(-10,10)
         self.ax1.set_ylim(-10, 10)
         self.ax1.set_xlabel('Time',fontsize=12)
-        self.ax1.set_ylabel('Theta 1',fontsize=12)
-        # self.ax1.grid(True)
+        self.ax1.set_ylabel(name + ' 1',fontsize=12)
 
         self.ax2 = fig.add_subplot(322)
         self.ax2.set_xlim(-10,10)
         self.ax2.set_ylim(-10, 10)
         self.ax2.set_xlabel('Time',fontsize=12)
-        self.ax2.set_ylabel('Theta 2',fontsize=12)
+        self.ax2.set_ylabel(name + ' 2',fontsize=12)
 
         self.ax3 = fig.add_subplot(323)
         self.ax3.set_xlim(-10,10)
         self.ax3.set_ylim(-10, 10)
         self.ax3.set_xlabel('Time',fontsize=12)
-        self.ax3.set_ylabel('Theta 3',fontsize=12)
+        self.ax3.set_ylabel(name + ' 3',fontsize=12)
 
         self.ax4 = fig.add_subplot(324)
         self.ax4.set_xlim(-10,10)
         self.ax4.set_ylim(-10, 10)
         self.ax4.set_xlabel('Time',fontsize=12)
-        self.ax4.set_ylabel('Theta 4',fontsize=12)
+        self.ax4.set_ylabel(name + ' 4',fontsize=12)
 
         self.ax5 = fig.add_subplot(325)
         self.ax5.set_xlim(-10,10)
         self.ax5.set_ylim(-10, 10)
         self.ax5.set_xlabel('Time',fontsize=12)
-        self.ax5.set_ylabel('Theta 5',fontsize=12)
+        self.ax5.set_ylabel(name + ' 5',fontsize=12)
 
         self.ax6 = fig.add_subplot(326)
         self.ax6.set_xlim(-10,10)
         self.ax6.set_ylim(-10, 10)
         self.ax6.set_xlabel('Time',fontsize=12)
-        self.ax6.set_ylabel('Theta 6',fontsize=12)
+        self.ax6.set_ylabel(name + ' 6',fontsize=12)
         
         super(MplCanvas, self).__init__(fig)
         fig.tight_layout()
@@ -104,116 +103,147 @@ class MainWindow(QMainWindow):
         # đặt tên giao diện
         self.setWindowTitle('6DOF Controller')
         # khởi tạo các giá trị cần thiết để vẽ đáp ứng trong giao diện
-        self.sc = MplCanvas(self,width=15, height=10, dpi=80)
-        self.ui.formlayout_the.addWidget(self.sc)      #QFormLayout
+        self.sc_the = MplCanvas(self,width=15, height=10, dpi=80, name='Theta')
+        self.ui.formlayout_the.addWidget(self.sc_the)      #QFormLayout
+        self.sc_err = MplCanvas(self,width=15, height=10, dpi=80, name='Error')
+        self.ui.formlayout_err.addWidget(self.sc_err)      #QFormLayout
         # khởi tạo các giá trị ban đầu 
         UIFunctions.uiDefinitions(self)
 
         # khởi chạy phân luồng
-        self.start_worker()
-        self.start_worker_1()
+        # self.start_worker_receive()
+        # self.start_worker_plot()
 
         # tạo chức năng cho button
-        self.btn_connect.clicked.connect(lambda: UIFunctions.connect_arduino_clicked(self))
-        self.btn_disconnect.clicked.connect(lambda: UIFunctions.disconnect_arduino_clicked(self))
+        self.btn_connect.clicked.connect(lambda: UIFunctions.connect_stm(self))
+        self.btn_start.clicked.connect(lambda: UIFunctions.start_receive(self))
+        self.btn_stop.clicked.connect(lambda: UIFunctions.stop_receive(self))
+        self.btn_disconnect.clicked.connect(lambda: UIFunctions.disconnect_stm(self))
+        self.btn_page_the.clicked.connect(lambda: UIFunctions.show_page_the(self)) 
+        self.btn_page_err.clicked.connect(lambda: UIFunctions.show_page_err(self))
 
-    def update_plot(self):
-        # xoá hình plot đáp ứng
-        self.sc.ax1.cla()  
-        # plot đáp ứng
-        self.sc.ax1.set_xlabel('Time',fontsize=12)
-        self.sc.ax1.set_ylabel('Theta 1',fontsize=12)
-        self.sc.ax1.plot(self.x1, self.the1, 'r')
-        self.sc.ax1.grid()
+    def plot_data(self):
+        while True:
+            # xoá hình plot đáp ứng
+            self.sc_the.ax1.cla()  
+            # plot đáp ứng
+            self.sc_the.ax1.set_xlabel('Time',fontsize=12)
+            self.sc_the.ax1.set_ylabel('Theta 1',fontsize=12)
+            self.sc_the.ax1.plot(self.i, self.the1, 'r')
+            self.sc_the.ax1.grid()
 
-        self.sc.ax2.cla()       
-        self.sc.ax2.set_xlabel('Time',fontsize=12)
-        self.sc.ax2.set_ylabel('Theta 2',fontsize=12)
-        self.sc.ax2.plot(self.x1, self.the2, 'r')
-        self.sc.ax2.grid()
+            self.sc_the.ax2.cla()       
+            self.sc_the.ax2.set_xlabel('Time',fontsize=12)
+            self.sc_the.ax2.set_ylabel('Theta 2',fontsize=12)
+            self.sc_the.ax2.plot(self.i, self.the2, 'r')
+            self.sc_the.ax2.grid()
 
-        self.sc.ax3.cla()
-        self.sc.ax3.set_xlabel('Time',fontsize=12)
-        self.sc.ax3.set_ylabel('Theta 3',fontsize=12)
-        self.sc.ax3.plot(self.x1, self.the3, 'r')
-        self.sc.ax3.grid()
+            self.sc_the.ax3.cla()
+            self.sc_the.ax3.set_xlabel('Time',fontsize=12)
+            self.sc_the.ax3.set_ylabel('Theta 3',fontsize=12)
+            self.sc_the.ax3.plot(self.i, self.the3, 'r')
+            self.sc_the.ax3.grid()
 
-        self.sc.ax4.cla()
-        self.sc.ax4.set_xlabel('Time',fontsize=12)
-        self.sc.ax4.set_ylabel('Theta 4',fontsize=12)
-        self.sc.ax4.plot(self.x1, self.the4, 'r')
-        self.sc.ax4.grid()
+            self.sc_the.ax4.cla()
+            self.sc_the.ax4.set_xlabel('Time',fontsize=12)
+            self.sc_the.ax4.set_ylabel('Theta 4',fontsize=12)
+            self.sc_the.ax4.plot(self.i, self.the4, 'r')
+            self.sc_the.ax4.grid()
 
-        self.sc.ax5.cla()
-        self.sc.ax5.set_xlabel('Time',fontsize=12)
-        self.sc.ax5.set_ylabel('Theta 5',fontsize=12)
-        self.sc.ax5.plot(self.x1, self.the5, 'r')
-        self.sc.ax5.grid()
+            self.sc_the.ax5.cla()
+            self.sc_the.ax5.set_xlabel('Time',fontsize=12)
+            self.sc_the.ax5.set_ylabel('Theta 5',fontsize=12)
+            self.sc_the.ax5.plot(self.i, self.the5, 'r')
+            self.sc_the.ax5.grid()
 
-        self.sc.ax6.cla()
-        self.sc.ax6.set_xlabel('Time',fontsize=12)
-        self.sc.ax6.set_ylabel('Theta 6',fontsize=12)
-        self.sc.ax6.plot(self.x1, self.the6, 'r')
-        self.sc.ax6.grid()
-        # cập nhập, plot lại đáp ứng
-        self.sc.draw()
+            self.sc_the.ax6.cla()
+            self.sc_the.ax6.set_xlabel('Time',fontsize=12)
+            self.sc_the.ax6.set_ylabel('Theta 6',fontsize=12)
+            self.sc_the.ax6.plot(self.i, self.the6, 'r')
+            self.sc_the.ax6.grid()
+            # cập nhập, plot lại đáp ứng
+            self.sc_the.draw()
+
+            # xoá hình plot đáp ứng
+            self.sc_err.ax1.cla()  
+            # plot đáp ứng
+            self.sc_err.ax1.set_xlabel('Time',fontsize=12)
+            self.sc_err.ax1.set_ylabel('Error 1',fontsize=12)
+            self.sc_err.ax1.plot(self.i, self.the1, 'r')
+            self.sc_err.ax1.grid()
+
+            self.sc_err.ax2.cla()       
+            self.sc_err.ax2.set_xlabel('Time',fontsize=12)
+            self.sc_err.ax2.set_ylabel('Error 2',fontsize=12)
+            self.sc_err.ax2.plot(self.i, self.the2, 'r')
+            self.sc_err.ax2.grid()
+
+            self.sc_err.ax3.cla()
+            self.sc_err.ax3.set_xlabel('Time',fontsize=12)
+            self.sc_err.ax3.set_ylabel('Error 3',fontsize=12)
+            self.sc_err.ax3.plot(self.i, self.the3, 'r')
+            self.sc_err.ax3.grid()
+
+            self.sc_err.ax4.cla()
+            self.sc_err.ax4.set_xlabel('Time',fontsize=12)
+            self.sc_err.ax4.set_ylabel('Error 4',fontsize=12)
+            self.sc_err.ax4.plot(self.i, self.the4, 'r')
+            self.sc_err.ax4.grid()
+
+            self.sc_err.ax5.cla()
+            self.sc_err.ax5.set_xlabel('Time',fontsize=12)
+            self.sc_err.ax5.set_ylabel('Error 5',fontsize=12)
+            self.sc_err.ax5.plot(self.i, self.the5, 'r')
+            self.sc_err.ax5.grid()
+
+            self.sc_err.ax6.cla()
+            self.sc_err.ax6.set_xlabel('Time',fontsize=12)
+            self.sc_err.ax6.set_ylabel('Error 6',fontsize=12)
+            self.sc_err.ax6.plot(self.i, self.the6, 'r')
+            self.sc_err.ax6.grid()
+            # cập nhập, plot lại đáp ứng
+            self.sc_err.draw()
 
     # các hàm gọi luồng
-    def start_worker(self):
-        worker = Worker(self.start_stream,)
-        self.threadpool.start(worker)
-    def start_worker_1(self):
-        worker_1 = Worker(self.stream_data_arduino,)
-        self.threadpool_1.start(worker_1)
+    def start_worker_plot(self):
+        worker_plot = Worker(self.plot_data,)
+        self.threadpool_plot.start(worker_plot)
+    def start_worker_receive(self):
+        worker_receive = Worker(self.receive_data,)
+        self.threadpool_receive.start(worker_receive)
 
-    def start_stream(self):
-        while True:
-            try:
-                # thiết lập timer để kích hoạt hàm update_plot
-                self.update_plot() 
-                self.timer = QtCore.QTimer()
-                self.timer.setInterval(100)
-                self.timer.timeout.connect(self.update_plot)
-                self.timer.start()
-            except :
-                pass
-    # def start_stream_data_arduino(self):
-    #     while  self.ser.isOpen():
-    #         print('Hello stream data')
-    #         try:
-    #             strdata = self.ser.readline().decode()
-    #             print(strdata)
-    #             time.sleep(0.1)
-    #         except:
-    #             pass
-
-    def stream_data_arduino(self):
-        while True:
+    def receive_data(self):
+        while self.ser.isOpen() and self.flag==1:
             try:
                 if self.ser.in_waiting:
+                    # in ra số byte mỗi chu kì nhận được
+                    self.byte_input = self.ser.in_waiting
+                    print(self.byte_input)
                     # xử lý dữ liệu nhận về và lưu vào biến kiểu list
                     self.data = self.ser.readline().decode().strip().split(',')
+                    # làm sạch bộ đệm đầu vào, xoá tất cả nội dung
+                    self.ser.flushInput()
                     # thời gian lấy mãu dữ liệu nhận về 0.1s (100ms)
                     time.sleep(0.1)  
-                    if len(self.data) == 6: 
+                    if len(self.data) == 9 and self.data[0] == 'start' and self.data[8] == 'stop': 
                         # list để plot đáp ứng (append - thêm phần tử vào list)
-                        self.x1.append(self.t)                    
-                        self.the1.append(float(self.data[0]))
-                        self.the2.append(float(self.data[1]))
-                        self.the3.append(float(self.data[2]))
-                        self.the4.append(float(self.data[3]))
-                        self.the5.append(float(self.data[4]))
-                        self.the6.append(float(self.data[5]))
-                        # cập nhập thời gian
-                        self.t += 0.01
+                        self.i.append(float(self.data[1]))                    
+                        self.the1.append(float(self.data[2]))
+                        self.the2.append(float(self.data[3]))
+                        self.the3.append(float(self.data[4]))
+                        self.the4.append(float(self.data[5]))
+                        self.the5.append(float(self.data[6]))
+                        self.the6.append(float(self.data[7]))
+
 
                         # hiển thị theta liên tục theo tg thực 
-                        self.le_the1.setText(str(self.data[0]))
-                        self.le_the2.setText(str(self.data[1]))
-                        self.le_the3.setText(str(self.data[2]))
-                        self.le_the4.setText(str(self.data[3]))
-                        self.le_the5.setText(str(self.data[4]))
-                        self.le_the6.setText(str(self.data[5]))
+                        self.le_time.setText(str(self.data[1]))
+                        self.le_the1.setText(str(self.data[2]))
+                        self.le_the2.setText(str(self.data[3]))
+                        self.le_the3.setText(str(self.data[4]))
+                        self.le_the4.setText(str(self.data[5]))
+                        self.le_the5.setText(str(self.data[6]))
+                        self.le_the6.setText(str(self.data[7]))
 
                         # tăng số thứ tự hàng theo từng chu kì lấy mẫu
                         self.line_data = self.line_data + 1  
@@ -225,18 +255,28 @@ class MainWindow(QMainWindow):
                         cell_the4 = ("E"+str(self.line_data))
                         cell_the5 = ("F"+str(self.line_data))
                         cell_the6 = ("G"+str(self.line_data))
+                        cell_byte = ("H"+str(self.line_data))
                         # load file excel
                         wb = openpyxl.load_workbook('Data.xlsx')
                         # xử lý data trên sheet1
                         sheet1 = wb['Sheet1']
                         # thay đổi giá trị từng cell trong sheet1
-                        sheet1[cell_t].value = self.t 
-                        sheet1[cell_the1].value = float(self.data[0])
-                        sheet1[cell_the2].value = float(self.data[1])
-                        sheet1[cell_the3].value = float(self.data[2])
-                        sheet1[cell_the4].value = float(self.data[3])
-                        sheet1[cell_the5].value = float(self.data[4])
-                        sheet1[cell_the6].value = float(self.data[5])
+                        sheet1["A1"].value="Time"
+                        sheet1["B1"].value="Theta 1"
+                        sheet1["C1"].value="Theta 2"
+                        sheet1["D1"].value="Theta 3"
+                        sheet1["E1"].value="Theta 4"
+                        sheet1["F1"].value="Theta 5"
+                        sheet1["G1"].value="Theta 6"
+                        sheet1["H1"].value="Byte Input"
+                        sheet1[cell_t].value    = float(self.data[1])
+                        sheet1[cell_the1].value = float(self.data[2])
+                        sheet1[cell_the2].value = float(self.data[3])
+                        sheet1[cell_the3].value = float(self.data[4])
+                        sheet1[cell_the4].value = float(self.data[5])
+                        sheet1[cell_the5].value = float(self.data[6])
+                        sheet1[cell_the6].value = float(self.data[7])
+                        sheet1[cell_byte].value = float(self.byte_input)
                         # lưu lại dữ liệu vừa thêm
                         wb.close
                         wb.save('Data.xlsx')

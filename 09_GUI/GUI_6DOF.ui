@@ -300,7 +300,7 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>PARAMETERS</string>
     </property>
-    <widget class="QPushButton" name="btn_send">
+    <widget class="QPushButton" name="btn_start">
      <property name="geometry">
       <rect>
        <x>230</x>
@@ -316,10 +316,10 @@ color: rgb(255, 255, 255);</string>
       </font>
      </property>
      <property name="text">
-      <string>Send</string>
+      <string>Start</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="btn_disconnect_2">
+    <widget class="QPushButton" name="btn_stop">
      <property name="geometry">
       <rect>
        <x>350</x>
@@ -335,7 +335,98 @@ color: rgb(255, 255, 255);</string>
       </font>
      </property>
      <property name="text">
-      <string>Receive</string>
+      <string>Stop</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_page_the">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>80</y>
+       <width>101</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Page 1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_page_err">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>80</y>
+       <width>111</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Page 2</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_time">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>170</y>
+       <width>113</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+
+	border-radius: 5px;
+	border: 2px solid rgb(27, 29, 35);
+	padding-left: 10px;
+}
+QLineEdit:hover {
+	border: 2px solid rgb(64, 71, 88);
+
+}
+QLineEdit:focus {
+	border: 2px solid rgb(91, 101, 124);
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lbl_time">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>170</y>
+       <width>47</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>t:</string>
      </property>
     </widget>
    </widget>
@@ -692,7 +783,7 @@ QLineEdit:focus {
     <widget class="QLabel" name="lbl_x">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>240</x>
        <y>30</y>
        <width>47</width>
        <height>31</height>
@@ -705,7 +796,7 @@ QLineEdit:focus {
       </font>
      </property>
      <property name="text">
-      <string>X:</string>
+      <string>Err1:</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="le_x">
@@ -745,7 +836,7 @@ QLineEdit:focus {
     <widget class="QLabel" name="lbl_z">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>240</x>
        <y>110</y>
        <width>47</width>
        <height>31</height>
@@ -758,7 +849,7 @@ QLineEdit:focus {
       </font>
      </property>
      <property name="text">
-      <string>Z:</string>
+      <string>Err3:</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbl_roll">
@@ -777,7 +868,7 @@ QLineEdit:focus {
       </font>
      </property>
      <property name="text">
-      <string>Roll:</string>
+      <string>Err4:</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbl_pitch">
@@ -796,7 +887,7 @@ QLineEdit:focus {
       </font>
      </property>
      <property name="text">
-      <string>Pitch:</string>
+      <string>Err5:</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbl_yaw">
@@ -815,7 +906,7 @@ QLineEdit:focus {
       </font>
      </property>
      <property name="text">
-      <string>Yaw:</string>
+      <string>Err6:</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="le_pitch">
@@ -855,7 +946,7 @@ QLineEdit:focus {
     <widget class="QLabel" name="lbl_y">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>240</x>
        <y>70</y>
        <width>47</width>
        <height>31</height>
@@ -868,7 +959,7 @@ QLineEdit:focus {
       </font>
      </property>
      <property name="text">
-      <string>Y:</string>
+      <string>Err2:</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="le_roll">
@@ -1008,28 +1099,87 @@ QLineEdit:focus {
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="formLayoutWidget">
+   <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>150</y>
-      <width>481</width>
-      <height>231</height>
+      <x>510</x>
+      <y>120</y>
+      <width>1081</width>
+      <height>771</height>
      </rect>
     </property>
-    <layout class="QFormLayout" name="formlayout_the1"/>
-   </widget>
-   <widget class="QWidget" name="formLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>150</y>
-      <width>1061</width>
-      <height>741</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
-    <layout class="QFormLayout" name="formlayout_the"/>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="page_the">
+     <widget class="QWidget" name="formLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>1061</width>
+        <height>741</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formlayout_the"/>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>10</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Trang 1</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_err">
+     <widget class="QWidget" name="formLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>1061</width>
+        <height>741</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formlayout_err"/>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>10</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Trang 2</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
+   <zorder>stackedWidget</zorder>
+   <zorder>gb_connection</zorder>
+   <zorder>gb_parameters</zorder>
+   <zorder>gb_response</zorder>
   </widget>
  </widget>
  <resources/>

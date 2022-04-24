@@ -4,6 +4,11 @@ from main import *
 
 
 class UIFunctions(MainWindow):
+    def show_page_the(self):
+        self.ui.stackedWidget.setCurrentWidget(self.page_the)
+    def show_page_err(self):
+        self.ui.stackedWidget.setCurrentWidget(self.page_err)
+
     def Serial_connect(self,comm,baud):
         self.ser.port = comm
         self.ser.baudrate =  baud
@@ -29,7 +34,7 @@ class UIFunctions(MainWindow):
             self.cb_comports.addItem(str(self.commPort[0]))
             self.cb_comports.addItem(str(self.commPort[1]))
 
-    def connect_arduino_clicked(self):
+    def connect_stm(self):
         comport = self.cb_comports.currentText()
         baurate = self.cb_baudrates.currentText()
         self.chb_status.setChecked(False)
@@ -54,7 +59,7 @@ class UIFunctions(MainWindow):
             # self.btn_disconnect_arduino.setStyleSheet('QPushButton {background-color:#1b1d23; color: white;}') 
             print("Connected Arduino")
 
-    def disconnect_arduino_clicked(self):
+    def disconnect_stm(self):
             self.ser.close()
             if not self.ser.isOpen():
                 self.chb_status.setEnabled(False)
@@ -72,27 +77,44 @@ class UIFunctions(MainWindow):
                 # self.valuethe6.clear()
                 self.cb_comports.setCurrentIndex(0)
                 self.cb_baudrates.setCurrentIndex(0)
+    def start_receive(self):
+        self.flag = 1
+        # xoá bảng excel
+        wb = openpyxl.load_workbook('Data.xlsx')
+        sheet1 = wb['Sheet1']
+        # sheet1.delete_cols(1,7) # xoá từ cột A:G
+        sheet1.delete_rows(2,99999999)
+        wb.close
+        wb.save('Data.xlsx')
+        if self.ser.isOpen() :
+            self.ser.write('1'.encode())
+            self.ser.flushInput()
+            self.ser.flushOutput()
+            print("Start Receive")
+        self.start_worker_receive()
+        self.start_worker_plot()
+
+    def stop_receive(self):
+        print("Stop Receive")
+        if self.ser.isOpen() and self.flag==1:
+            self.ser.write('0'.encode())
+            self.flag=0
+            self.line_data=0
 
     def uiDefinitions(self):
         self.line_data = 1
-        self.t = 0
         self.the1 = list()
         self.the2 = list()
         self.the3 = list()
         self.the4 = list()
         self.the5 = list()
         self.the6 = list()
-        self.x1 = list()
+        self.i    = list()
         # khởi tạo phân luồng 
-        self.threadpool = QtCore.QThreadPool()
-        self.threadpool_1 = QtCore.QThreadPool()
+        self.threadpool_plot = QtCore.QThreadPool()
+        self.threadpool_receive = QtCore.QThreadPool()
         # khởi tạo báo serial
         self.ser =  serial.Serial()
         UIFunctions.list_port(self)
         
-        # xoá bảng excel
-        wb=openpyxl.load_workbook('Data.xlsx')
-        sheet1= wb['Sheet1']
-        sheet1.delete_cols(1,7) # xoá từ cột A:G
-        wb.close
-        wb.save('Data.xlsx')
+
