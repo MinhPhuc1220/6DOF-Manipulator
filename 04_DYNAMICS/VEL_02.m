@@ -1,7 +1,7 @@
 %% Authors:
 % Made by Tran Minh Phuc
 % Date: 2021/03/29:
-% NOTE: Có xét đến vị trí trọng tâm (lấy theo trục mình đặt từng khâu), moment quán tính, khối lượng từng khâu
+% NOTE:  Co xet vi tri trong tam, moment quan tinh, khoi luong tung khau
 clc;
 clear all;
 close all;

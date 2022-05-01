@@ -1,8 +1,8 @@
 %% Authors:
 % Made by Tran Minh Phuc
 % Date: 2021/03/29:
-% NOTE: Có xét đến vị trí trọng tâm, moment quán tính, khối lượng từng khâu
-% sử dụng hàm gradient để tính đạo hàm từng phần
+% NOTE: Co xet vi tri trong tam, moment quan tinh, khoi luong tung khau
+% su dung ham gradient
 % Lagrange approach
 %% Total of kinetic energies:
 K = 1/2*(m1*v01c'*v01c + w1'*I1*w1) + 1/2*(m2*v02c'*v02c + w2'*I2*w2) + 1/2*(m3*v03c'*v03c + w3'*I3*w3) + 1/2*(m4*v04c'*v04c + w4'*I4*w4) + 1/2*(m5*v05c'*v05c + w5'*I5*w5) + 1/2*(m6*v06c'*v06c + w6'*I6*w6);

@@ -1,7 +1,7 @@
 %% Authors:
 % Made by Tran Minh Phuc
 % Date: 2021/02/12:
-% NOTE: Có xét đến vị trí trọng tâm
+% NOTE: co xet vi tri trong tam
 clc;
 % clear all;
 close all;

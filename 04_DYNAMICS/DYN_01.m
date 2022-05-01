@@ -1,7 +1,7 @@
 %% Authors:
 % Made by Tran Minh Phuc
 % Date: 2021/02/12
-% Topic: Tính toán DYN (dạng tổng quát)
+% Topic: TINH TOAN DYN (dang tong quat)
 % Lagrange approach
 %% Total of kinetic energies:
 K = 1/2*(m1*v01c'*v01c + I1*w1'*w1) + 1/2*(m2*v02c'*v02c + I2*w2'*w2) + 1/2*(m3*v03c'*v03c + I3*w3'*w3) + 1/2*(m4*v04c'*v04c + I4*w4'*w4) + 1/2*(m5*v05c'*v05c + I5*w5'*w5) + 1/2*(m6*v06c'*v06c + I6*w6'*w6);
