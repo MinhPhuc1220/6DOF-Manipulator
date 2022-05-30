@@ -268,7 +268,9 @@ C = simplify(0.5*(dM + dMde*K2 - (dMde*K2).'))
 skew = simplify(dM - 2*C) % this is skew matrix
 x = [1;1;1;100;1;1];
 err = simplify(x.'*(skew)*x)
-
+%%
+M = [M1 M2 M3 M4 M5 M6]
+tau = simplify(M*[dde1;dde2;dde3;dde4;dde5;dde6]+C*[de1;de2;de3;de4;de5;de6]+G)
 %%
 filedM = fopen('dM.txt','w'); 
 fprintf(filedM,'dM = ...\n[%s,%s,%s,%s,%s,%s;\n %s,%s,%s,%s,%s,%s;\n %s,%s,%s,%s,%s,%s;\n %s,%s,%s,%s,%s,%s;\n %s,%s,%s,%s,%s,%s;\n %s,%s,%s,%s,%s,%s];',dM(1,1),dM(1,2),dM(1,3),dM(1,4),dM(1,5),dM(1,6),dM(2,1),dM(2,2),dM(2,3),dM(2,4),dM(2,5),dM(2,6),dM(3,1),dM(3,2),dM(3,3),dM(3,4),dM(3,5),dM(3,6),dM(4,1),dM(4,2),dM(4,3),dM(4,4),dM(4,5),dM(4,6),dM(5,1),dM(5,2),dM(5,3),dM(5,4),dM(5,5),dM(5,6),dM(6,1),dM(6,2),dM(6,3),dM(6,4),dM(6,5),dM(6,6));
