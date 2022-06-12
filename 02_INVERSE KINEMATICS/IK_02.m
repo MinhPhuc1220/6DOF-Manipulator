@@ -19,8 +19,8 @@ m=0;
 
 % From random value
 %y = roll, b = pitch, a = yaw;
-px = 450; py = 150 ; pz = 545;
-yaw = pi/2; pitch = pi/3; roll = pi/3;
+px = 450; py = 0 ; pz = 695;
+yaw = 0; pitch = -pi/2; roll = 0;
 r11 = cos(yaw)*cos(pitch);
 r21 = sin(yaw)*cos(pitch);
 r31 = -sin(pitch);

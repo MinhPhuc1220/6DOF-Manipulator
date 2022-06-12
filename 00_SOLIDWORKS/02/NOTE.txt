@@ -1,0 +1,6 @@
+NOTE: ĐÃ ĐẶT TRỤC CHÍNH XÁC, TÁCH KHỚP 5 VÀ 6, FILE IMPORT VÀO SIMSCAPE
+
+link5 - file chưa tách khớp 5 và 6
+link5_test - file copy của link5
+like5_test1 - file tách khớp 5 lẻ
+like5_test2 - file tách khớp 6 lẻ
